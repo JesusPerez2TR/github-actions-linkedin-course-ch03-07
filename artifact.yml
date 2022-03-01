@@ -1,0 +1,27 @@
+name: artifact
+
+on: [push]
+
+env:
+  FILE_NAME: hola_mundo
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v1
+
+    - name: Build ${{ env.FILE_NAME }} for ubuntu-latest
+      run: echo "hola mundo" > ${{ env.FILE_NAME }}.txt
+      
+    - name: Upload artifact for linux
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: linux
+        path: ./${{ env.FILE_NAME }}
+
+
+  
